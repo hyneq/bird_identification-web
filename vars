@@ -4,6 +4,8 @@ venv="$project_root/venv"
 
 req_dir="$project_root/requirements"
 
+app_dir="$project_root/bird_identification_web"
+
 if [ -n "$PYTHONPATH" ]; then
     export PYTHONPATH=$project_root/bird_identification_web:$PYTHONPATH
 else
