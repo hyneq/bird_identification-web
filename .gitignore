@@ -2,3 +2,4 @@
 __pycache__
 venv
 vars*.local
+bird_identification_web/settings.py
