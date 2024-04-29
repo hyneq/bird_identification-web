@@ -10,6 +10,8 @@ else
     export PYTHONPATH=$project_root/bird_identification_web
 fi
 
+export DJANGO_SETTINGS_MODULE=bird_identification_web.settings
+
 function load_vars() {
     local source_path="$project_root/$1"
 
