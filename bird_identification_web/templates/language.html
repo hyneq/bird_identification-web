@@ -1,0 +1,29 @@
+{% comment %}
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This file is a base Django template for the Bird identification project
+
+{% endcomment %}
+
+{# Based on the example at https://docs.djangoproject.com/en/3.1/topics/i18n/translation/#django.views.i18n.set_language #}
+
+{% load i18n %}
+{% load static %}
+
+{# Define language variables #}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+    <input name="language" type="hidden" value="">
+
+    {% for language in languages %}
+        <button class="lang-change" onclick="submitLangForm(this.form, '{{ language.code }}');">
+            <img src="{% static 'icons/language/'|add:language.code|add:'.png' %}" alt="{{ language.name_local }}">
+        </button>
+    {% endfor %}
+</form>

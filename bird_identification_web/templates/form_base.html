@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block main %}
+
+<h2>
+{% block heading %}
+{% endblock %}
+</h2>
+
+{% block before_form %}
+<p>
+{% block message %}
+{% endblock %}
+</p>
+{% endblock %}
+
+{% block form %}
+{% if form %}
+<form method="post" action="{% block form_action %}{{ request.path }}{% endblock %}">
+    {% csrf_token %}
+
+    {% block form_non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endblock %}
+    
+    {% block form_fields %}
+    <table class='form_table'>
+        {% for field in form.visible_fields %}
+            <tr>
+                <th>
+                    {{ field.label_tag }}
+                </th>
+                <td>
+                    {{ field }}
+                    {{ field.errors }}
+                </td>
+            </tr>
+        {% endfor %}
+        
+        <tr>
+            <th></th>
+            <td>
+            {% block form_submit %}
+                <button type="submit">
+                    {% block submit_text %}{% translate 'Submit' %}{% endblock %}
+                </button>
+            {% endblock %}
+            </td>
+        </tr>
+    </table>
+    {% endblock %}
+
+    {% block form_hidden_fields %}
+        {% for field in forms.hidden_fields %}
+            {{ field }}
+        {% endfor %}
+    {% endblock %}
+
+    {% block form_hidden_additional %}
+    {% endblock %}
+
+</form>
+{% endif %}
+{% endblock %}
+
+{% block after_form %}
+{% endblock %}
+
+{% endblock %}

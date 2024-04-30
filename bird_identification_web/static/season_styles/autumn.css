@@ -1,0 +1,18 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This stylesheet defines the colors for autumn
+*/
+
+body { background-color: #fce1d7 } /* 1st color */
+
+header, nav, main { background-color: #fcad90 } /* 2nd color */
+
+header h1, nav a, .highlighted-block, .button {
+    background-color: #ff8357; /* 3rd color */
+}
+nav a:hover, .button:hover {
+    background-color: #fc4c0d; /* 4th color */
+}

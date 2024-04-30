@@ -1,0 +1,297 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+This is the static stylesheet for all pages of the Bird identification project
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+*/
+
+body {
+    background-color: white; /* 1st color */
+    max-width: 1300px;
+    margin: auto;
+    font-family: Arial;
+}
+
+/* Common for main blocks */
+header, nav, main {
+    background-color: #bfbfbf; /* 2nd color */
+    color: black;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+
+header h1, nav a, .highlighted-block, .button {
+    background-color: #afafaf; /* 3rd color */
+}
+
+/* The main header of the page */
+header h1 {
+    display: inline-block;
+    padding: 5px;
+    margin: 20px;
+    font-size: 40pt;
+    border-radius: 15px;
+}
+header h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Widgets to the side of header */
+#header-side {
+    float: right;
+    
+    /* Borrowed from https://www.sketchingwithcss.com/samplechapter/cheatsheet.html#right */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+#header-side * {
+    margin-left: auto;
+    margin-right: 0;
+}
+#header-side *:first-child {
+    margin-top: 0;
+}
+
+nav {
+    padding: 5px;
+}
+
+nav a {
+    display: inline-block;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 15px;
+}
+nav a:hover, .button:hover {
+    background-color: #787878; /* 4th color */
+}
+
+main {
+    padding: 20px;
+    color: black;
+    font-size: 16px;
+    overflow: auto;
+}
+
+main h2 {
+    margin-top: 0;
+}
+
+footer {
+    text-align: center;
+}
+
+/* Blocks with the same look as nav links */
+.highlighted-block {
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.button {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0.5em;
+    padding: 0.3em;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #787878;
+}
+
+/* Spinning loader CSS is based on the example at https://www.w3schools.com/howto/howto_css_loader.asp */
+.spin-loader {
+    border: 0.1em solid;
+    border-color: #f3f3f3; /* light grey */
+    border-top-color: #afafaf; /* Grey */
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+    animation: spin 2s linear infinite;
+}
+
+span.spin-loader {
+    display: inline-block;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading three dots based on https://codepen.io/brainbrian/pen/bwKBJj */
+@keyframes dot-keyframes {
+    0% {
+        opacity: .4;
+        transform: scale(1, 1);
+    }
+    
+    50% {
+        opacity: 1;
+        transform: scale(1.2, 1.2);
+    }
+    
+    100% {
+        opacity: .4;
+        transform: scale(1, 1);
+    }
+}
+  
+.loading-dots {
+    text-align: center;
+}
+.loading-dots * {
+    animation: dot-keyframes 1.5s infinite ease-in-out;
+    background-color: #787878;
+    border-radius: 50%;
+    display: inline-block;
+    height: 0.8em;
+    width: 0.8em;
+}
+.loading-dots *:nth-child(2) {
+    animation-delay: .5s;
+}
+
+.loading-dots *:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.loading-dots *:nth-child(n+4) {
+    display: none;
+}
+
+span.loading-dots {
+    text-align: inherit;
+}
+
+/* Used to hide an element */
+.hidden {
+    display: none !important;
+}
+
+#message-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+}
+
+/* CSS of messages are based on the example at https://www.w3schools.com/howto/howto_js_alert.asp */
+
+.message {
+    padding: 20px;
+    color: white;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    max-width: 400px;
+}
+
+.closebtn {
+    position: relative;
+    bottom: 1.5px;
+    margin-left: 15px;
+    padding: 0;
+    color: white;
+    float: right;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.closebtn:hover {
+    color: black;
+    border: none;
+    background-color: rgba(245,245,245,0.5);
+}
+
+.message-info {
+    background-color: #2196F3;
+}
+
+.message-error {
+    background-color: #f44336;
+}
+
+/* Based on the example at https://www.w3schools.com/css/css_tooltip.asp */
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Don't display the language button's background */
+.lang-change {
+    background-color: transparent;
+    border: none;
+}
+
+#attribution {
+    font-size: 8pt;
+}
+
+/* Forms */
+
+.form_table th, .form_table td {
+    text-align: left;
+}
+
+.errorlist {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.errorlist.nonfield {
+    margin-bottom: 5px;
+}
+
+.errorlist li {
+    padding-top: 5px;
+}
+
+.errorlist::before {
+    content: url('/static/icons/warning-small.png');
+    float: left;
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+}
+.errorlist.nonfield::before {
+    content: url('/static/icons/warning.png');
+    top: 0;
+}

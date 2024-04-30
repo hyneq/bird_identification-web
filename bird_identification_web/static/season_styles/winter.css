@@ -1,0 +1,18 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This stylesheet defines the colors for winter
+*/¨
+
+body { background-color: #def6ff } /* 1st color */
+
+header, nav, main { background-color: #a4e4fc } /* 2nd color */
+
+header h1, nav a, .highlighted-block, .button {
+    background-color: #62d1fc; /* 3rd color */
+}
+nav a:hover, .button:hover {
+    background-color: #14beff; /* 4th color */
+}

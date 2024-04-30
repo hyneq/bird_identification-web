@@ -1,0 +1,18 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This stylesheet defines the colors for spring
+*/
+
+body { background-color: #eaffd4 } /* 1st color */
+
+header, nav, main { background-color: #afd982 } /* 2nd color */
+
+header h1, nav a, .highlighted-block, .button {
+    background-color: #90c953; /* 3rd color */
+}
+nav a:hover, .button:hover {
+    background-color: #68c208; /* 4th color */
+}

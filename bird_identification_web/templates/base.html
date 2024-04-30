@@ -1,0 +1,70 @@
+{% comment %}
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This file is a base Django template for the Bird identification project
+
+{% endcomment %}
+
+{# Load tags #}
+{% load i18n %}
+{% load static %}
+
+{# Set the variable with the language code #}
+{% get_current_language as LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="referrer" content="origin">
+
+        {# The title should be overriden by child templates #}
+        <title>{% block title %}{% translate "Bird identification" %}{% endblock %}</title>
+
+        {# The common stylesheet for all pages #}
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        {# The stylesheet based on the current season, defines seasonal colors #}
+        <link rel="stylesheet" href="{% static 'season_styles/'|add:season|add:'.css' %}">
+        
+        {# Additional stylesheets that can be added in child templates #}
+        {% block stylesheets %}
+        {% endblock %}
+
+        {# The script with available translations #}
+        <script src="{% url 'javascript-catalog' %}"></script>
+
+        {# Additional scripts that can be added in child templates #}
+        {% block scripts %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1><a href='/'>{% translate "Bird identification" %}</a></h1><!-- The main heading -->
+            
+            {# The block with some widgets on the right of the header #}
+            <div id='header-side'>
+                {# {% include 'accounts.html' %} #}{# Include login/logout controls #}
+                {% include "language.html" %} {# Include language selection #}
+            </div>
+        </header>
+        <nav>
+            {% include "nav.html" %} {# Include the links for the navigation #}
+        </nav>
+        <main>
+            {# The main content that should be defined by child templates #}
+            {% block main %}
+            {% endblock %}
+        </main>
+        <footer>
+            <p>&copy; Hynek V. Svobodný, 2024</p><!-- The footer with a copyright -->
+            <div id='attribution'>
+                {% include 'attribution.html' %}
+            </div>
+        </footer>
+        <div id="message-box">
+            <!-- Message elements should be added here -->
+        </div>
+    </body>
+</html>
