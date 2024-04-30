@@ -49,11 +49,12 @@ header h1 a {
     flex-direction: column;
     align-items: flex-end;
 }
-#header-side * {
+#header-side>* {
     margin-left: auto;
     margin-right: 0;
+    margin-bottom: 16px;
 }
-#header-side *:first-child {
+#header-side>*:first-child {
     margin-top: 0;
 }
 
@@ -94,6 +95,8 @@ footer {
 }
 
 .button {
+    font-size: inherit;
+    border: none;
     text-decoration: none;
     color: inherit;
     border-radius: 0.5em;
@@ -103,6 +106,10 @@ footer {
 
 .button:hover {
     background-color: #787878;
+}
+
+.inline {
+    display: inline;
 }
 
 /* Spinning loader CSS is based on the example at https://www.w3schools.com/howto/howto_css_loader.asp */

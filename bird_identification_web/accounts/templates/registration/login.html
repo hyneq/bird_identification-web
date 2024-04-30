@@ -1,0 +1,27 @@
+{# Based on the example at https://docs.djangoproject.com/en/3.1/topics/auth/default/#django.contrib.auth.views.LoginView #}
+{% extends "form_base.html" %}
+{% load i18n %}
+
+{% block heading %}
+{% translate "Log in" %}
+{% endblock %}
+
+
+{% block before_form %}
+{% endblock %}
+
+{% block form_hidden_additional %}
+    {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+    {% else %}
+        <input type="hidden" name="next" value="/">
+    {% endif %}
+{% endblock %}
+
+{% block submit_text %}
+{% translate 'Log in' %}
+{% endblock %}
+
+{% block after_form %}
+<p><a href="{% url 'password_reset' %}">{% translate "Lost password?" %}</a></p>
+{% endblock %}

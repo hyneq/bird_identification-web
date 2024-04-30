@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div id='accounts'>
+    {% if user.is_authenticated %}
+        <a href="{% url 'password_change' %}" class="button">{% translate "Change password" %}</a>
+
+        {# from https://stackoverflow.com/a/77690772 #}
+        <form method="post" action="{% url 'logout' %}" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="button">{% translate "Log out" %}</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="button">{% translate "Log in" %}</a>
+    {% endif %}
+</div>

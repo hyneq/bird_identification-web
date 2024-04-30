@@ -1,0 +1,16 @@
+{% extends 'email_base.html' %}
+
+{% load i18n %}
+
+{% block content %}
+{% blocktranslate %}
+Dear user,
+an account at the Bird identification website has been created for you.
+The account allows you to access the live video stream which is not available to the public.
+{% endblocktranslate %}
+
+{% blocktranslate %}Your username: {{ username }}{% endblocktranslate %}
+
+{% blocktranslate %}In order to use the account, you need to set a password for it. Please follow the link below:{% endblocktranslate %}
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+{% endblock %}

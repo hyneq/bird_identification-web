@@ -20,6 +20,7 @@ from django.views.generic.base import TemplateView
 
 
 urlpatterns = [
+    path('accounts/', include('accounts.urls')),
     path('empty/', TemplateView.as_view(template_name="base.html")),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),
