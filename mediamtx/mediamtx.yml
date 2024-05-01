@@ -1,0 +1,8 @@
+rtsp: no
+rtmp: no
+hls: no
+srt: no
+
+paths:
+  prediction:
+    sourceOnDemand: yes
