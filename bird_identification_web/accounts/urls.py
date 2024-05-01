@@ -27,4 +27,5 @@ urlpatterns = [
     path('password_reset/done', django_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('password_reset/confirm/<uidb64>/<token>', django_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password_reset/complete', django_views.PasswordResetCompleteView.as_view(template_name='registration/password_change_done.html'), name='password_reset_complete'),
+    path('get_httpd_session', views.get_httpd_session, name='get_httpd_session')
 ]

@@ -5,6 +5,17 @@ from django.contrib.auth import views as base_views
 
 from . import forms
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.utils.http import urlencode
+
+session_string = 'weather-station-user={user}&weather-station-pw={pw}'
+
+# Generates a url-encoded session string based on username and session
+def generate_httpd_session(username, session):
+     return session_string.format(user=username, pw=session.session_key) # Session key is used as a password
+
+
 # Create your views here.
 class LoginView(base_views.LoginView):
     form_class = forms.LoginForm
@@ -16,7 +27,12 @@ class LoginView(base_views.LoginView):
             self.request.session.set_expiry(0)  # if remember me is set 
             self.request.session.modified = True
 
-        return super().form_valid(form)
+        response = super().form_valid(form)
+          
+        # Set httpd session
+        response['X-Replace-Session'] = generate_httpd_session(self.request.POST['username'], self.request.session)
+
+        return response
 
 
 class LogoutView(base_views.LogoutView):
@@ -25,6 +41,18 @@ class LogoutView(base_views.LogoutView):
         response = super().dispatch(*args, **kwargs)
 
         return response
+
+
+def get_httpd_session(request):
+     next = request.GET.get('next','/')
+     if request.user.is_authenticated:
+          response = HttpResponseRedirect(next)
+          response['X-Replace-Session'] = generate_httpd_session(request.user.username, request.session)
+     else:
+          next = "{}?{}".format(reverse('login'), urlencode({'next': next}))
+          response = HttpResponseRedirect(next)
+          
+     return response
 
 
 class PasswordResetView(base_views.PasswordResetView):

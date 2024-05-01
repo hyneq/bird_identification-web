@@ -14,3 +14,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bird_identification_web.settings')
 
 application = get_wsgi_application()
+
+from accounts.wsgi import check_password
+from django.contrib.auth.handlers.modwsgi import groups_for_user
