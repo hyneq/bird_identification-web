@@ -17,7 +17,7 @@ fi
 export SETUP_MODE="$mode"
 
 # Create a venv with test dependencies and activate it
-if [[ -z "$NO_CREATE_VENV" ]]; then
+if [[ -z "$SETUP_NO_VENV" ]]; then
     "$project_root/create_venv.sh"
     source "$project_root/activate"
 fi
