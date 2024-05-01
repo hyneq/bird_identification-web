@@ -6,4 +6,5 @@ bird_identification_web/email_settings.py
 bird_identification_web/settings.py
 bird_identification_web/db.sqlite3
 bird_identification_web/secret
+bird_identification_web/static_collected
 mediamtx/mediamtx
