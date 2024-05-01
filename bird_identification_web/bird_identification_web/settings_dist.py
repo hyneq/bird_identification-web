@@ -148,6 +148,13 @@ LOGOUT_REDIRECT_URL = "/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Import email settings
+try:
+    from email_settings import *
+except ImportError:
+    pass
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailBackend'
