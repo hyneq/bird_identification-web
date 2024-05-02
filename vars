@@ -6,7 +6,8 @@ venv="$project_root/venv"
 
 req_dir="$project_root/requirements"
 
-app_dir="$project_root/bird_identification_web"
+app_dir="$project_root/$app_name"
+app_core_dir="$app_dir/$app_name"
 
 mediamtx_dir="$project_root/mediamtx"
 
