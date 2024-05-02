@@ -1,36 +1,36 @@
 #!/bin/bash
 
-# based on https://github.com/hyneq/STINBankSystem/blob/main/start_server.sh
+# based on https://github.com/hyneq/wea-projekt/blob/main/backend/start.sh
 
-# Starts mod_wsgi server configued for this project
+# Starts the server according to the mode selected
 
-source "$(dirname "$0")/activate"
+# Load variables and activate venv
+source "$(dirname "$0")"/vars
 
-# Stop the server first if it is already running
-if [ -f $pid_file ]; then
-    "$project_root/stop.sh"
-    sleep 0.3
-fi
+source "$project_root/server_vars"
 
-# Create the logs dir
-mkdir -p "$logs_dir"
+# Run with a strategy dependent on mode
+mode="$1"
+case "$mode" in
+    "deploy")
 
-# Start the server out-of-session
-export APP_NAME="$app_name"
-export APP_DIR="$app_dir"
-nohup \
-mod_wsgi-express start-server \
---port="$server_port" \
---url-alias=/static "$app_dir/static_collected/" \
---application-type=django \
---passenv=DJANGO_SETTINGS_MODULE \
---working-directory="$app_dir" \
---access-log-name="$logs_dir/access.log" \
---error-log-name="$logs_dir/error.log" \
---entry-point="$app_dir/bird_identification_web/wsgi.py" \
---include-file="$project_root/httpd.conf" \
-> "$logs_dir/server.out" 2>&1 \
-&
+        # Start mod_wsgi-express out-of-session
+        nohup "$project_root/run_mod_wsgi.sh" &>"$logs_dir/mod_wsgi.out" &
 
-# Write the server's PID to a pidfile
-echo $! > "$pid_file"
+        ;;
+
+    "dev_apache")
+        # run mod_wsgi-express normally
+        exec "$project_root/run_mod_wsgi.sh"
+
+        ;;
+    
+    "dev")
+        # run Django development server
+        exec "$project_root/manage.sh" runserver
+
+        ;;
+
+    *)
+        exec "$0" "$SETUP_MODE"
+esac

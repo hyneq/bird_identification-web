@@ -1,0 +1,9 @@
+server_root="/tmp/mod_wsgi-$app_name-$server_port:$UID"
+
+pid_file="$server_root/httpd.pid"
+
+logs_dir="$project_root/logs"
+
+custom_apache_conf="$project_root/httpd.conf"
+
+test -z "$APACHE_SYSTEM_CONF" && export APACHE_SYSTEM_CONF="/etc/apache2"

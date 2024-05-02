@@ -6,6 +6,8 @@
 
 source "$(dirname "$0")/activate"
 
+source "$project_root/server_vars"
+
 # Exit if no pid_file is present
 if [[ ! -f "$pid_file" ]]; then
     echo "Server for $app_name not running, cannot stop" >&2
@@ -13,7 +15,4 @@ if [[ ! -f "$pid_file" ]]; then
 fi
 
 # Kill the server process
-kill "$(cat "$pid_file")" 2>/dev/null
-
-# Remove the pidfile
-rm "$pid_file"
+"$server_root/apachectl" graceful-stop
