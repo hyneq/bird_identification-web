@@ -8,4 +8,4 @@ custom_apache_conf="$project_root/httpd.conf"
 
 test -z "$APACHE_SYSTEM_CONF" && export APACHE_SYSTEM_CONF="/etc/apache2"
 
-test -z "$stream_path" && stream_path="http://localhost:$mediamtx_hls_port/prediction"
+test -z "$stream_path" && stream_path="http://localhost:$mediamtx_hls_port/$STREAM_NAME"
