@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# based on https://github.com/hyneq/STINBankSystem/blob/main/start_server.sh
+# based on https://github.com/hyneq/STINBankSystem/blob/main/stop_server.sh
 
 # Stops server if running
 
