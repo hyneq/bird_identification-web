@@ -22,6 +22,7 @@ fi
 mod_wsgi-express start-server \
 --server-root "$server_root" \
 --port="$server_port" \
+--proxy-mount-point="$STREAM_INTERFACE_PATH" "$stream_path" \
 --url-alias=/static "$app_dir/static_collected/" \
 --application-type=django \
 --passenv=DJANGO_SETTINGS_MODULE \

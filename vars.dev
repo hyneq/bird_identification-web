@@ -1,1 +1,2 @@
 server_port=8049
+mediamtx_hls_port=8849

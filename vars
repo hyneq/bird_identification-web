@@ -18,6 +18,10 @@ export ALLOWED_HOSTS="localhost,127.0.0.1"
 
 server_port=8040
 
+mediamtx_hls_port=8840
+
+export STREAM_INTERFACE_PATH="/stream_interface/prediction"
+
 if [ -n "$PYTHONPATH" ]; then
     export PYTHONPATH=$project_root/bird_identification_web:$PYTHONPATH
 else
