@@ -12,25 +12,39 @@ source "$project_root/server_vars"
 # Run with a strategy dependent on mode
 mode="$1"
 case "$mode" in
-    "deploy")
+    "apache_nohup")
 
-        # Start mod_wsgi-express out-of-session
-        nohup "$project_root/run_mod_wsgi.sh" &>"$logs_dir/mod_wsgi.out" &
+        # Run start_server.sh out of session
+        nohup "$0" apache &>"$logs_dir/server.out" &
 
         ;;
 
-    "dev_apache")
+    "apache")
+        # Start mediamtx, if not explicitly disabled
+        if [[ -z "$NO_MEDIAMTX" ]]; then
+            "$project_root/mediamtx/mediamtx_proxy.sh" &
+            mediamtx_pid=$!
+        fi
+
         # run mod_wsgi-express normally
-        exec "$project_root/run_mod_wsgi.sh"
+        "$project_root/run_mod_wsgi.sh"
+
+        # Wait for mediamtx, if running
+        if [[ -n "$mediamtx_pid" ]]; then
+            kill $mediamtx_pid 2>/dev/null @@
+            wait $mediamtx_pid || true
+        fi
 
         ;;
     
-    "dev")
+    "django")
         # run Django development server
         exec "$project_root/manage.sh" runserver
 
         ;;
 
     *)
-        exec "$0" "$SETUP_MODE"
+        echo "$0: The first argument must be 'apache', 'apache_nohup', or 'django'" > /dev/stderr
+        exit 1
+
 esac
