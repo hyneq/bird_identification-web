@@ -11,6 +11,7 @@ source "$project_root/server_vars"
 
 # Run with a strategy dependent on mode
 mode="$1"
+test -z "$mode" && mode="apache"
 case "$mode" in
     "apache_nohup")
 
@@ -42,9 +43,5 @@ case "$mode" in
         exec "$project_root/manage.sh" runserver
 
         ;;
-
-    *)
-        echo "$0: The first argument must be 'apache', 'apache_nohup', or 'django'" > /dev/stderr
-        exit 1
 
 esac
