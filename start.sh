@@ -43,5 +43,10 @@ case "$mode" in
         exec "$project_root/manage.sh" runserver
 
         ;;
+    
+    *)
+        echo "$0: The first argument must be 'apache', 'apache_nohup', 'django' or omitted for default ('apache')" > /dev/stderr
+        exit 1
+
 
 esac
