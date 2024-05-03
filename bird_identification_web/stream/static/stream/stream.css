@@ -1,0 +1,14 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+This stylesheet defines the layout of the elements related to the video stream
+*/
+
+#stream {
+    left: 50%;
+    position: relative;
+    transform: translate(-50%,0);
+
+    width: 1200px;
+    height: 450px;
+}

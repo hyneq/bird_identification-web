@@ -42,6 +42,7 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(','
 
 INSTALLED_APPS = [
     'accounts',
+    'stream',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -163,3 +164,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailBackend'
 ]
+
+
+# Custom variables
+
+STREAM_INTERFACE_PATH = os.environ.get("STREAM_INTERFACE_PATH", "/stream_interface/stream")

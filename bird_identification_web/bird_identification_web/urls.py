@@ -18,9 +18,15 @@ from django.urls import path, include
 from django.views.i18n import JavaScriptCatalog
 from django.views.generic.base import TemplateView
 
+from django.conf import settings
+
+import stream.views
+
 
 urlpatterns = [
     path('accounts/', include('accounts.urls')),
+    path('stream/', stream.views.index, name='stream'),
+    path(settings.STREAM_INTERFACE_PATH.lstrip("/")+"/index.m3u8", stream.views.stream, name='stream_interface'),
     path('empty/', TemplateView.as_view(template_name="base.html")),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),

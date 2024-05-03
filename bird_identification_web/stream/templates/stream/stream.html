@@ -1,0 +1,20 @@
+{% comment %}
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+This HTML code can be included in any page together with the JS and CSS files to show the video stream
+{% endcomment %}
+
+{% load i18n %}
+
+{% if perms.camera.view_camera %}
+<div>
+    <video-js id="stream" class="vjs-default-skin" controls muted>
+        <source
+            src="{% url 'stream_interface' %}"
+            type="application/x-mpegURL"
+        >   
+    </video-js>
+</div>
+{% endif %}

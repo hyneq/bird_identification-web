@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{# The parent template #}
+
+{% comment %}
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+The page rendered by this template shows the remote video stream
+{% endcomment %}
+
+{# Load tags #}
+{% load i18n %}
+{% load static %}
+
+{# The title #}
+{% block title %}
+{% translate "Live video stream" %}
+{% endblock %}
+
+{# Load the stylesheet for the stream #}
+{% block stylesheets %}
+{% include "./stylesheets.html" %}
+{% endblock %}
+
+{# Load the scripts for the strea #}
+{% block scripts %}
+{% include "./scripts.html" %}
+{% endblock %}
+
+{% block main %}
+    <h2>{% translate "Live video stream" %}</h2><!-- The heading -->
+    
+    {# Include the stream elements #}
+    {% include "stream/stream.html" %}
+{% endblock %}
