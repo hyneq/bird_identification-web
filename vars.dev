@@ -1,2 +1,4 @@
+app_name="bird_identification_web-dev"
+
 server_port=8049
 mediamtx_hls_port=8849
