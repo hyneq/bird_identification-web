@@ -1,5 +1,7 @@
-# Czech translation of the bird_identification_web app
-# Hynek V. Svobodny, 2024.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
@@ -12,7 +14,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
 "<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
-
 #: accounts/forms.py:10
 msgid "Username or email"
 msgstr "Uživatelské jméno nebo email"
@@ -117,7 +118,6 @@ msgid "Password change at %(site_name)s"
 msgstr "Změna hesla na %(site_name)s"
 
 #: accounts/templates/registration/welcome_email.txt:6
-#, fuzzy
 msgid ""
 "\n"
 "Dear user,\n"
@@ -136,9 +136,6 @@ msgid "Your username: %(username)s"
 msgstr "Vaše uživatelské jméno: %(username)s"
 
 #: accounts/templates/registration/welcome_email.txt:14
-#, fuzzy
-#| msgid ""
-#| "You need to set a password for your account. Please follow the link below:"
 msgid ""
 "In order to use the account, you need to set a password for it. Please "
 "follow the link below:"
@@ -147,15 +144,14 @@ msgstr ""
 "následující odkaz:"
 
 #: accounts/templates/registration/welcome_subject.txt:1
-#, fuzzy
 msgid "Welcome to the Bird identification website"
 msgstr "Vítejte na webu Rozpoznávání ptáků"
 
-#: bird_identification_web/settings_dist.py:121
+#: bird_identification_web/settings_dist.py:122
 msgid "English"
 msgstr "anglicky"
 
-#: bird_identification_web/settings_dist.py:122
+#: bird_identification_web/settings_dist.py:123
 msgid "Czech"
 msgstr "česky"
 
@@ -241,17 +237,14 @@ msgid "Bird species occurence"
 msgstr "Výskyt druhů ptáků"
 
 #: stream/templates/stream/index.html:18 stream/templates/stream/index.html:32
-#, fuzzy
-#| msgid "Live camera stream"
 msgid "Live video stream"
 msgstr "Živý stream"
 
-#: templates/base.html:24 templates/base.html:44
+#: templates/base.html:24 templates/base.html:47
 msgid "Bird identification"
 msgstr "Rozpoznávání ptáků"
 
 #: templates/email_base.html:4
-#, fuzzy
 msgid ""
 "Yours sincerely,\n"
 "the Bird identification system."
@@ -265,4 +258,4 @@ msgstr "Odeslat"
 
 #: templates/nav.html:13
 msgid "Stream"
-msgstr ""
+msgstr "Stream"
