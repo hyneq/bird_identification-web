@@ -1,0 +1,58 @@
+/*
+(C) Hynek V. Svobodny, 2024
+
+This stylesheet defines the layout of the Object statistics page
+*/
+
+
+/* Horiyontal layout, as there are two sections */
+main {
+    display: flex;
+    height: auto;
+    position: relative;
+}
+
+/* The layout of the side menu */
+#side-menu {
+    flex-shrink: 0;
+    margin-right: 20px;
+    width: 200px;
+    position: relative;
+}
+#timespan-menu {
+    position: absolute;
+    bottom: 0;
+}
+#timespan-menu div {
+    margin-top: 15px;
+}
+#timespan-menu div:first-child {
+    margin-top: 0;
+}
+#time-input {
+    width: 100%;
+}
+
+/* The layout of the content section */
+#content {
+    width: 100%;
+}
+#content h2 {
+    margin-bottom: 5px;
+}
+#content h3 {
+    margin-top: 0;
+}
+
+/* The style of the chart container */
+#chart-container {
+    max-width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+/* The chart should fill the container */
+#chart {
+    width: 100%;
+    height: 100%;
+}

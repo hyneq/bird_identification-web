@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{# The parent template #}
+
+{% comment %}
+(C) Hynek V. Svobodny, 2024
+
+Based on the Weather Station project (https://github.com/hyneq/rpi-weather-station-www/)
+
+The page rendered by this template shows the object statistics using a chart
+{% endcomment %}
+
+{# Load tags #}
+{% load i18n %}
+{% load static %}
+
+{# The title #}
+{% block title %}
+{% translate "Object statistics" %}
+{% endblock %}
+
+{# Load the stylesheet for this page #}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'object_statistics/object_statistics.css' %}">
+{% endblock %}
+
+{% block scripts %}
+{# Load Chart.js from the CDN #}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2"></script>
+
+{# Load the Luxon datetime library #}
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4"></script>
+
+{# Load the Chart.js Luxon adapter #}
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1"></script>
+
+{#  #}
+<script src="{% static 'object_statistics/object_statistics.js' %}"></script>
+
+{# Include the chart data and available timespan data for use within JavaScript #}
+{{ chart_config|json_script:"chart-config" }}
+{{ timespans_available|json_script:"timespans-available" }}
+
+<script>
+    // Define global variables
+
+    // Load available timespans into a variable
+    const timespansAvailable = JSON.parse(document.getElementById('timespans-available').textContent);
+
+    // Set the current timespan
+    const currentTimespan = timespansAvailable["{{ current_timespan.name }}"];
+
+    // Define the URL template for loading a new timespan and time ('$TIMESPAN' and '$TIME_INPUT' should be replaced by loadNewTime())
+    const selfURLTemplate = "{% url 'object_statistics' timespan_name='$TIMESPAN' time_input='$TIME_INPUT' %}";
+
+    window.onload = () => {
+        // Get the chart's canvas element
+        var chartCanvas = document.getElementById('chart');
+
+        // Get the chart config
+        var chartConfig = JSON.parse(document.getElementById('chart-config').textContent);
+
+        // View the chart
+        showChart(chartCanvas, chartConfig);
+
+        // Set the time select form event handlers
+        setTimeSelectFormHandlers(document.getElementById('time-select-form'));
+    }
+</script>
+{% endblock %}
+
+{% block main %}
+<section id='side-menu'><!-- The menu for selecting the timespan and time -->
+    <div id='timespan-menu' class="highlighted-block"><!-- The menu for selecting the timespan and time -->
+        <form id="time-select-form">
+            <div>
+                <label for="timespan">{% translate "Timespan:" %}</label>
+                <br>
+                <select id="timespan" name="timespan"><!-- The input field with available timespans -->
+                    {% for timespan in timespans_available.values %}
+                        <option value="{{ timespan.name }}" {% if timespan.name == current_timespan.name %}selected{% endif %}>
+                            {% translate timespan.verbose_name %}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <!-- A choice between 'Recent' and 'Custom' time modes -->
+                <span id="time-mode-choice">
+                    <input type="radio" id="time-mode-recent" name="time-mode" value="recent" {% if time_input == 'recent' %}checked{% endif %}>
+                    <label for="time-mode-recent">{% translate "Recent" %}</label>
+                    <br>
+
+                    <input type="radio" id="time-mode-custom" name="time-mode" value="custom" {% if time_input != 'recent' %}checked{% endif %}>
+                    <label for="time-mode-custom">{% translate "Custom" %}</label>
+                </span>
+                <br>
+
+                <!-- The time input field with the type of the current timespan -->
+                <input type="{{ current_timespan.input_type }}" id="time-input" name="time-input" value="{{ current_timespan.default_time }}" min="{{ current_timespan.min_time }}" max="{{ current_timespan.max_time }}" {% if time_input == 'recent' %}disabled{% else %}value="{{ time }}"{% endif %}>
+
+                <button type="submit">{% translate "Show data" %}</button><!-- The submit button -->
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- The main content with the chart -->
+<section id='content'>
+    <h2>{% translate "Statistics" %}</h2><!-- The heading -->
+
+    <!-- A subheading with data description and the time selected -->
+    <h3>{% translate "Bird species occurence" %} - {% if time == none %}{% translate "Recent" %} ({{ current_timespan.verbose_name }}){% else %}{{ time|date:current_timespan.title_format }}{% endif %}</h3>
+    
+    <div id="chart-container"><!-- The container for the chart -->
+        <canvas id="chart"></canvas><!-- The actual chart -->
+    </div>
+</section>
+{% endblock %}
