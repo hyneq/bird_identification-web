@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse
+from django.shortcuts import redirect
 from django.views.i18n import JavaScriptCatalog
 from django.views.generic.base import TemplateView
 
@@ -23,7 +24,12 @@ from django.conf import settings
 import stream.views
 
 
+def root_redirect(request):
+    return redirect(reverse('object_statistics_default'))
+
+
 urlpatterns = [
+    path('', root_redirect),
     path('accounts/', include('accounts.urls')),
     path('stream/', stream.views.index, name='stream'),
     path(settings.STREAM_INTERFACE_PATH.lstrip("/")+"/index.m3u8", stream.views.stream, name='stream_interface'),
