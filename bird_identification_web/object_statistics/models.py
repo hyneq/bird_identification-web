@@ -73,4 +73,7 @@ class LoggedObject(models.Model):
             max_time=Max('start_time')
         )
 
-        return vals['min_time'], vals['max_time']
+        return (
+            vals['min_time'] or datetime.now(),
+            vals['max_time'] or datetime.now()
+        )
