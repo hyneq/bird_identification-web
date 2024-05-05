@@ -122,7 +122,7 @@ def index(request, timespan_name=config.default_timespan, time_input='recent'):
     chart_config = deepcopy(chart_config_base)
     
     # Set values in chart_config
-    chart_config['label'] = _('Occurence of bird species')
+    chart_config['label'] = _('Bird species occurence')
     chart_config['type'] = 'bar'
 
     # Put the datasets with the actual data to chart_config
