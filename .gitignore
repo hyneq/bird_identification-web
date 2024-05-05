@@ -9,3 +9,4 @@ bird_identification_web/secret
 bird_identification_web/static_collected
 mediamtx/mediamtx
 logs/
+*.mo

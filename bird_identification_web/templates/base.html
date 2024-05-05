@@ -35,6 +35,9 @@ This file is a base Django template for the Bird identification project
         {# The script with available translations #}
         <script src="{% url 'javascript-catalog' %}"></script>
 
+        {# The common script file for all pages #}
+        <script src="{% static 'script.js' %}" defer></script>
+
         {# Additional scripts that can be added in child templates #}
         {% block scripts %}
         {% endblock %}
