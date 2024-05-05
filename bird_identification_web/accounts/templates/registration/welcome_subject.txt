@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktranslate %}Welcome to the Weather Station Website{% endblocktranslate %}
+{% load i18n %}{% blocktranslate %}Welcome to the Bird identification website{% endblocktranslate %}
