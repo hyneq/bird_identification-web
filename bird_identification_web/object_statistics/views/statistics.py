@@ -83,7 +83,7 @@ def index(request, timespan_name=config.default_timespan, time_input='recent'):
     group_by = timespan['group_by']
 
     # Retrieve the data from the database
-    queryset = LoggedObject.query(window_start=time, group_unit=group_by)
+    queryset = LoggedObject.query(window_start=time, group_unit=group_by, window_duration=delta)
 
     # Get a set of class names from queryset
     class_names = sorted(set(entry['class_name'] for entry in queryset.values('class_name') if entry['class_name'])) + [None]
