@@ -172,6 +172,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
+# Long session cookie age
+SESSION_COOKIE_AGE = 2*365*24*60*60 # 10 years
+
+
 # Custom variables
 
 STREAM_INTERFACE_PATH = os.environ.get("STREAM_INTERFACE_PATH", "/stream_interface/stream")
