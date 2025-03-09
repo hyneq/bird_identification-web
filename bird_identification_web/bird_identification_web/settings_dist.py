@@ -173,7 +173,7 @@ AUTHENTICATION_BACKENDS = [
 
 
 # Long session cookie age
-SESSION_COOKIE_AGE = 2*365*24*60*60 # 10 years
+SESSION_COOKIE_AGE = 10*365*24*60*60 # 10 years
 
 
 # Custom variables
